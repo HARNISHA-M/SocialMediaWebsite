@@ -7,7 +7,7 @@ import {getFirestore} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  //firebase config
+  //firebase configs
 };
 
 // Initialize Firebase
