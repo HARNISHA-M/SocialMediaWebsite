@@ -28,6 +28,7 @@ export const Addpostform = () => {
             ...data,
             username:user?.displayName,
             userId:user?.uid,
+            likes:[],
         });
         navigate("/");
     }

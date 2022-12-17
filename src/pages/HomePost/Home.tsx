@@ -9,6 +9,7 @@ export interface PostType {
     Title:string,
     userId:string,
     username:String,
+    likes:String[],
 };
 export const Home = () => {
     const postRef = collection(db,"posts");
