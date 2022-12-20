@@ -7,6 +7,7 @@ export interface PostType {
     id:string,
     Description:string,
     Title:string,
+    Url:string,
     userId:string,
     username:String,
     likes:String[],
