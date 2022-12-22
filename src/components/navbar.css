@@ -1,3 +1,7 @@
 .navbar{
     background-color:#059BE5;
 }
+
+.navitem{
+    display: block;
+}

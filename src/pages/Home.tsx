@@ -1,7 +1,7 @@
 import {getDocs , collection, doc} from "firebase/firestore";
 import { useEffect, useState } from "react";
-import {db} from '../../config/firebase';
-import {ShowPost} from './showPost';
+import {db} from '../config/firebase';
+import {ShowPost} from '../components/showPost';
 
 export interface PostType {
     id:string,
@@ -19,7 +19,7 @@ export const Home = () => {
     const getPosts = async() =>{
         const data= await getDocs(postRef);
         setPostList(data.docs.map((doc)=>({...doc.data(),id:doc.id})) as PostType[]);
-        console.log(data.docs.map((doc)=>({...doc.data(),id:doc.id})) as PostType[])
+        // console.log(data.docs.map((doc)=>({...doc.data(),id:doc.id})) as PostType[])
     }
 
     useEffect(()=>{

@@ -1,8 +1,8 @@
 import { doc, updateDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db } from '../../config/firebase';
-import {PostType} from './Home';
+import { auth, db } from '../config/firebase';
+import {PostType} from '../pages/Home';
 
 interface propType {
     post:PostType;
