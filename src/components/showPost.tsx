@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../config/firebase';
 import {PostType} from '../pages/Home';
+import {Comment} from './Comment';
 
 interface propType {
     post:PostType;
@@ -53,6 +54,9 @@ export const ShowPost = (props:propType) => {
             <div className='footer'>
                 <button onClick={hasLiked ? removeId: AddId}>{hasLiked? <>&#128078;</>: <>&#128077;</>}</button>
                 <p>Likes:{LikeId.length}</p>
+                <div>
+                    <Comment postId={post.id} postComments={post.comments}  />
+                </div>
             </div>
         </div>
     )

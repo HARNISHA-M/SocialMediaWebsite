@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import * as yup from "yup";
+import * as yup from 'yup';
 import {yupResolver} from "@hookform/resolvers/yup";
 import {addDoc, collection } from "firebase/firestore";
 import {db,auth} from "../../config/firebase"
@@ -9,6 +9,7 @@ import {storage} from "../../config/firebase";
 import {uploadBytes,ref,getDownloadURL} from "firebase/storage";
 import { useState } from "react";
 import  {v4} from "uuid";
+
 interface data {
     Title:string;
     Description : string;
@@ -48,6 +49,7 @@ export const Addpostform = () => {
             username:user?.displayName,
             userId:user?.uid,
             likes:[],
+            comments:[],
         });
         navigate("/");
     }
