@@ -26,7 +26,7 @@ interface commentProps {
 
 export const Comment = (props:any|commentProps) => {
 
-    console.log(props.postComments);
+    // console.log(props.postComments);
     useEffect(()=>{
         setCommentList(props.postComments);
     },[]);
@@ -53,7 +53,7 @@ export const Comment = (props:any|commentProps) => {
         // e.preventDefault();
         await updateDoc(docRef,{comments:[...commentList,{"comment":newcomment,"commentuserId":user?.uid,"commentuserName":user?.displayName}]});
         setCommentList([...commentList,{"comment":newcomment,"commentuserId":user?.uid,"commentuserName":user?.displayName}]);
-        console.log(commentList);
+        // console.log(commentList);
         setNewComment("");
     }
 
@@ -62,8 +62,8 @@ export const Comment = (props:any|commentProps) => {
             Comment: 
             {commentList?.map((comment:commentType)=>(
                 <div>
-                    <p>{comment.comment}</p>
-                    <p>{comment.commentuserName}</p>
+                    <span>{comment.comment}</span>
+                    <span>{comment.commentuserName}</span>
                 </div>
             ))}
             <form onSubmit={handleSubmit(submitComment)}>

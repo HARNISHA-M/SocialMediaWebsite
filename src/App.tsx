@@ -7,12 +7,12 @@ import { Addpost } from './pages/addpost/Addpost';
 import {Navbar} from './components/Navbar';
 import { Myprofile } from './pages/Myprofile';
 import { createContext } from 'react';
-import { useContext } from 'react';
 
 export interface data{
   url:string;
   setUrl:Function;
 }
+
 export const Appcontext = createContext<data | null>(null);
 function App() {
   const [url,setUrl] = useState<string | null>(null);

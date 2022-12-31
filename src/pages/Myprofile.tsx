@@ -13,6 +13,7 @@ import { PostType } from './Home';
 interface data {
     Image:null;
 }
+
 export const Myprofile = () => {
 
     const urldata = useContext(Appcontext);
@@ -47,7 +48,7 @@ export const Myprofile = () => {
         {
             setImageUpload(e.target.files[0]);
         }
-        console.log(imageUpload);
+        // console.log(imageUpload);
     }
 
     

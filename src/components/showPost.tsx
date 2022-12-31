@@ -4,6 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../config/firebase';
 import {PostType} from '../pages/Home';
 import {Comment} from './Comment';
+import { DeletePost } from './DeletePost';
 
 interface propType {
     post:PostType;
@@ -58,6 +59,7 @@ export const ShowPost = (props:propType) => {
                     <Comment postId={post.id} postComments={post.comments}  />
                 </div>
             </div>
+            {user?.uid == post.userId && <DeletePost postId = {post.id} imageUrl = {post.Url}></DeletePost>}
         </div>
     )
 }
