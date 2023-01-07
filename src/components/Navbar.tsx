@@ -25,6 +25,8 @@ export const Navbar = () => {
             const url= await getDownloadURL(imageRef)
             .then((url)=>{
                 urldata?.setUrl(url);
+            }).catch( (e) => {
+                console.log("g")
             });
             
         }
@@ -38,6 +40,7 @@ export const Navbar = () => {
     useEffect(()=>{
         profilePic();
     },[user]);
+    
     return (
         <div className="navbar">
            <div>
@@ -46,7 +49,7 @@ export const Navbar = () => {
                 <div>
                    {user && 
                       <>
-                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : user?.photoURL|| ""} width="50" height="50" ></img></p>
+                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50" height="50" ></img></p>
 
                         <Link to='/myprofile' className="navitem">My profile</Link>
                         <button onClick={logout}>Log-out</button>

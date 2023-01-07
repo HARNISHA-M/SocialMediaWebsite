@@ -5,6 +5,8 @@ import { auth, db } from '../config/firebase';
 import {PostType} from '../pages/Home';
 import {Comment} from './Comment';
 import { DeletePost } from './DeletePost';
+import { Following } from './Following';
+import { ShowProfile } from "./showProfile";
 
 interface propType {
     post:PostType;
@@ -40,6 +42,10 @@ export const ShowPost = (props:propType) => {
 
     return(
         <div>
+
+            <div>
+                <ShowProfile postUserId={post.userId}></ShowProfile>
+            </div>
             <div className='title'>
                 <h1>{post.Title}</h1>
             </div>
@@ -52,6 +58,7 @@ export const ShowPost = (props:propType) => {
             <div className='username'>
                 <p>@{post.username}</p>
             </div>
+            
             <div className='footer'>
                 <button onClick={hasLiked ? removeId: AddId}>{hasLiked? <>&#128078;</>: <>&#128077;</>}</button>
                 <p>Likes:{LikeId.length}</p>
@@ -60,6 +67,8 @@ export const ShowPost = (props:propType) => {
                 </div>
             </div>
             {user?.uid == post.userId && <DeletePost postId = {post.id} imageUrl = {post.Url}></DeletePost>}
+            {user?.uid != post.userId && <Following userId = {post.userId}  userName = {post.username}></Following>}
+            
         </div>
     )
 }

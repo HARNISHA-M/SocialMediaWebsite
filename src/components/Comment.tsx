@@ -27,9 +27,6 @@ interface commentProps {
 export const Comment = (props:any|commentProps) => {
 
     // console.log(props.postComments);
-    useEffect(()=>{
-        setCommentList(props.postComments);
-    },[]);
 
     const [user] = useAuthState(auth);
     const docRef = doc(db,"posts",props.postId);
@@ -57,11 +54,18 @@ export const Comment = (props:any|commentProps) => {
         setNewComment("");
     }
 
+    const [isVisible,setIsVisible] = useState<Boolean>();
+
+    useEffect(()=>{
+        setCommentList(props.postComments);
+        setIsVisible(false);
+    },[]);
+
     return(
         <div>
-            Comment: 
+            <a onClick={() => {setIsVisible(!isVisible)}}>view {commentList?.length} comments</a>
             {commentList?.map((comment:commentType)=>(
-                <div>
+                <div className={isVisible ? "visible" : "hide"}>
                     <span>{comment.comment}</span>
                     <span>{comment.commentuserName}</span>
                 </div>

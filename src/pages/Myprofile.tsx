@@ -9,6 +9,8 @@ import {storage} from "../config/firebase";
 import { useContext } from 'react';
 import { Appcontext } from '../App';
 import { PostType } from './Home';
+import { ShowFollowingComponent } from '../components/ShowFollowingComponent';
+import { Followers } from '../components/Followers';
 
 interface data {
     Image:null;
@@ -22,7 +24,7 @@ export const Myprofile = () => {
 
     // Query to get only current user posts
     const collectionRef = collection(db, "posts");
-    const profileQuery = query(collectionRef, where("userId", "==", user?.uid));
+    const profileQuery = query(collectionRef, where("userId", "==", user?.uid+""));
 
     // list to store posts
     const [profilePost,setProfilePost] = useState<PostType[] | null>(null);
@@ -32,9 +34,20 @@ export const Myprofile = () => {
         setProfilePost(data.docs.map((doc)=>({...doc.data(),id:doc.id})) as PostType[]);
     }
 
+    // followers and following count
+
+    const followingData = useContext(Appcontext);
+    const [followingCount,setFollowingCount] = useState<number>(0);
+    const [followersCount,setFollowersCount] = useState<number>(0);
+
+    useEffect(()=>{
+       if(followingData && followingData.FollowingList) setFollowingCount(followingData?.FollowingList?.length);
+       if(followingData && followingData.FollowersList) setFollowersCount(followingData.FollowersList.length);
+    },[followingData?.FollowingList]);
+
     useEffect(()=>{
         getPosts();
-    },[]);
+    },[user?.uid]);
 
     // for showing choose file option for profile
     const [editProfile,setEditProfile] = useState<Boolean>(false);
@@ -63,15 +76,17 @@ export const Myprofile = () => {
         setEditProfile(false);
     }
 
-    // function for updating profile pic
-
     return(
         <div>
             {user && 
                     <>
-                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : user?.photoURL|| ""} width="100" height="100" ></img></p>
+                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img></p>
                     </>
             }
+
+            <p>Following : {followingCount}</p>
+            <p>Followers : {followersCount}</p>
+
             <button onClick={()=>{setEditProfile(!editProfile)}}>Edit profile</button>
             {editProfile && 
                 <form onSubmit={handleSubmit(submitPost)}>
@@ -82,6 +97,12 @@ export const Myprofile = () => {
             {profilePost?.map((posts)=>(
                 <ShowPost post={posts} />
             ))}
+
+            <ShowFollowingComponent></ShowFollowingComponent>
+
+            <p>Followers:</p>
+
+            <Followers></Followers>
         </div>
     )
 }
