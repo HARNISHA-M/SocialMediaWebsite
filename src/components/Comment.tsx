@@ -5,7 +5,8 @@ import {useForm} from "react-hook-form";
 import { doc, updateDoc } from 'firebase/firestore';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
+import '../styles/post.css'
+import { ShowProfile } from './showProfile';
 
 interface commentForm {
     Title:string;
@@ -43,14 +44,12 @@ export const Comment = (props:any|commentProps) => {
     const [newcomment,setNewComment] = useState<string>();
 
     // creating state for comments
-    const [commentList,setCommentList] = useState<commentType[] | any>();
+    const [commentList,setCommentList] = useState<commentType[]|any>();
 
     // submiting comment
     const submitComment = async(e:any) => {
-        // e.preventDefault();
         await updateDoc(docRef,{comments:[...commentList,{"comment":newcomment,"commentuserId":user?.uid,"commentuserName":user?.displayName}]});
         setCommentList([...commentList,{"comment":newcomment,"commentuserId":user?.uid,"commentuserName":user?.displayName}]);
-        // console.log(commentList);
         setNewComment("");
     }
 
@@ -59,22 +58,36 @@ export const Comment = (props:any|commentProps) => {
     useEffect(()=>{
         setCommentList(props.postComments);
         setIsVisible(false);
+        console.log(isVisible);
     },[]);
 
     return(
         <div>
-            <a onClick={() => {setIsVisible(!isVisible)}}>view {commentList?.length} comments</a>
-            {commentList?.map((comment:commentType)=>(
-                <div className={isVisible ? "visible" : "hide"}>
-                    <span>{comment.comment}</span>
-                    <span>{comment.commentuserName}</span>
-                </div>
-            ))}
+            <hr></hr>
             <form onSubmit={handleSubmit(submitComment)}>
-                <input type="text" value={newcomment} {...register("Title")}  onChange={(e)=>{setNewComment(e.target.value);}}></input>
-                <p style={{color:"red"}}>{errors.Title?.message}</p>
-                <input type="submit"></input>
+                <div className="comment">
+                    <input type="text" placeholder="Add your comment" value={newcomment} {...register("Title")}  onChange={(e)=>{setNewComment(e.target.value);}}></input>
+                    <button className='commentButton'><i className="fa-sharp fa-solid fa-paper-plane"></i></button>
+                    <p style={{color:"red"}}>{errors.Title?.message}</p>
+                </div>
             </form>
+            {commentList?.length > 0 &&  <>
+                <a onClick={() => {setIsVisible(!isVisible)}}>View more comments ( {commentList?.length} )</a>
+                {commentList && 
+                    commentList?.map((comment:commentType)=>(
+                        <div className={isVisible ? "visible" : "hide"}>
+                            <ShowProfile postUserId={comment.commentuserId}></ShowProfile>
+                            <div>
+                                <span>
+                                    {comment.commentuserName.split(" ")[0]}
+                                    <span className="comments"> {comment.comment}</span>
+                                </span>
+                            </div>
+                            
+                        </div>
+                    ))}
+                </>
+            }
         </div>
     );
 }

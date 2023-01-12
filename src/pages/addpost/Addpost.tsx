@@ -2,7 +2,7 @@ import {Addpostform} from './Addpost-form';
 
 export const Addpost = () => {
     return(
-        <div>
+        <div >
             <Addpostform></Addpostform>
         </div>
     )

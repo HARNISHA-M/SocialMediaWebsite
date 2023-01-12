@@ -1,13 +1,14 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import {auth, storage} from "../config/firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {signOut} from "firebase/auth"
-import './navbar.css';
+import '../styles/navbar.css';
 import { getDownloadURL,ref } from "firebase/storage";
 import { useContext, useEffect } from 'react';
 import { Appcontext } from '../App';
 
 export const Navbar = () => {
+
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
     const logout = async() => {
@@ -18,43 +19,40 @@ export const Navbar = () => {
     const urldata = useContext(Appcontext);
 
     const profilePic = async () => {
-        if(!user?.uid) return ;
-        try
-        {
-            const imageRef = ref(storage,"Profile/"+user?.uid);
-            const url= await getDownloadURL(imageRef)
-            .then((url)=>{
-                urldata?.setUrl(url);
-            }).catch( (e) => {
-                console.log("g")
-            });
+        const imageRef = ref(storage,"Profile/"+user?.uid);
+        await getDownloadURL(imageRef)
+        .then((urlPic)=>{
+            urldata?.setUrl(urlPic);
+            console.log(urldata?.url);
+        }).catch( (e) => {
+            // urldata && urldata.setUrl(null);
+        });
             
-        }
-        catch(e)
-        {
-            urldata && urldata.setUrl("");
-            // alert("error"+e);
-        }
     }
 
     useEffect(()=>{
         profilePic();
-    },[user]);
+    },[user?.uid]);
     
     return (
         <div className="navbar">
            <div>
-                <Link to="/" className="navitem">Home</Link>
-                {user ? <Link to="/addpost" className="navitem">Add post</Link> : <Link to="/login" className="navitem">Login</Link>}
-                <div>
-                   {user && 
-                      <>
-                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50" height="50" ></img></p>
-
-                        <Link to='/myprofile' className="navitem">My profile</Link>
-                        <button onClick={logout}>Log-out</button>
-                      </>}
-                </div>
+                {user && 
+                    <>
+                        <div className="profileBackground"></div>
+                        {console.log(urldata?.url)}
+                        <img src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50" height="50" className="ProfileImg"></img>
+                        <div className="UserName">{user?.displayName?.split(" ")[0]}</div>
+                    </>
+                }
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-house"></i><span>Home</span></NavLink>
+                {user ? <NavLink to="/addpost" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-plus"></i><span>Create Post</span></NavLink> : <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-right-to-bracket"></i><span>LogIn</span></NavLink>}
+                {user &&
+                    <>
+                        <NavLink to='/myprofile' className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-user"></i><span>My Profile</span></NavLink>
+                        <a onClick={logout} className="inactive"><i className="fa-solid fa-right-from-bracket"></i><span>LogOut</span></a>
+                    </>
+                }
            </div>
         </div>
     )

@@ -11,7 +11,7 @@ import { Appcontext } from '../App';
 import { PostType } from './Home';
 import { ShowFollowingComponent } from '../components/ShowFollowingComponent';
 import { Followers } from '../components/Followers';
-
+import '../styles/myProfile.css'
 interface data {
     Image:null;
 }
@@ -40,14 +40,13 @@ export const Myprofile = () => {
     const [followingCount,setFollowingCount] = useState<number>(0);
     const [followersCount,setFollowersCount] = useState<number>(0);
 
-    useEffect(()=>{
-       if(followingData && followingData.FollowingList) setFollowingCount(followingData?.FollowingList?.length);
-       if(followingData && followingData.FollowersList) setFollowersCount(followingData.FollowersList.length);
-    },[followingData?.FollowingList]);
+    
 
     useEffect(()=>{
         getPosts();
-    },[user?.uid]);
+        if(followingData && followingData.FollowingList) setFollowingCount(followingData?.FollowingList?.length);
+        if(followingData && followingData.FollowersList) setFollowersCount(followingData.FollowersList.length);
+    },[user?.uid,followingData?.FollowingList]);
 
     // for showing choose file option for profile
     const [editProfile,setEditProfile] = useState<Boolean>(false);
@@ -55,6 +54,12 @@ export const Myprofile = () => {
     // for string newly uploaded image
     const [imageUpload,setImageUpload] = useState<null|any>();
 
+    const [isVisible,setIsVisible] = useState(0);
+ 
+    // useEffect(()=>{
+       
+    // //    setIsVisible(0)
+    // })
     
     const handleImage =(e:any) => {
         if(e.target.files[0])
@@ -76,33 +81,88 @@ export const Myprofile = () => {
         setEditProfile(false);
     }
 
+    const [postCount,setPostCount] = useState(0);
+    const getPostCount =async () => {
+            const postRef = collection(db,"posts");
+             const data= await getDocs(postRef);
+             console.log("`````````")
+             setPostCount(data.docs.length)
+            
+        
+    }
+
+    useEffect( () => {
+        getPostCount();
+    },[])
     return(
-        <div>
-            {user && 
-                    <>
-                        <p>{user?.displayName} <img src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img></p>
-                    </>
-            }
+        <div className="myProfile">
+            <div className="topBar"><>
+            {console.log(urldata?.url)}</>
+                  <div className="profilePic">
+                  <img className="profilePicture" src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img>
+                    <button className="editProfile" onClick={()=>{setEditProfile(!editProfile)}}><i className="fa-sharp fa-solid fa-pen"></i></button>
+                    {editProfile && 
+                        <form onSubmit={handleSubmit(submitPost)}>
+                            <input type="file" onChange={handleImage}></input>
+                            <button >Update</button>
+                        </form>
+                    } 
+                    <span className="UserName">{(user?.displayName+"").split(" ")[0]}</span>
+                    <span className="UserId">@{user?.displayName}</span>
+                  </div>
+                  <div className="profileDetails">
+                    <div className="Posts"  onClick={()=>{setIsVisible(0)}}><span>&nbsp;&nbsp;&nbsp;{postCount}</span><br></br><span className="name">Posts</span></div>
+                    <div className="Following" onClick={()=>{setIsVisible(1)}}><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{followingCount}</span><br></br><span className="name">Following</span></div>
+                    <div className="Followers" onClick={()=>{setIsVisible(2);}}><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{followersCount}</span><br></br><span className="name">Followers</span></div>
+                  </div>
+            </div>
+            <hr></hr>
+            <div className={isVisible == 0 ? "visible" : "hide"}>
+                {profilePost?.map((posts)=>(
+                    <ShowPost post={posts} />
+                ))}
+            </div>
 
-            <p>Following : {followingCount}</p>
-            <p>Followers : {followersCount}</p>
-
-            <button onClick={()=>{setEditProfile(!editProfile)}}>Edit profile</button>
-            {editProfile && 
-                <form onSubmit={handleSubmit(submitPost)}>
-                    <input type="file" onChange={handleImage}></input>
-                    <button >Update</button>
-                </form>
-            }
-            {profilePost?.map((posts)=>(
-                <ShowPost post={posts} />
-            ))}
-
-            <ShowFollowingComponent></ShowFollowingComponent>
-
-            <p>Followers:</p>
-
-            <Followers></Followers>
+            <div className="followingWidth">
+                <div className={isVisible == 1 ? "visible" : "hide"}>
+                    <ShowFollowingComponent></ShowFollowingComponent>
+                </div>
+            </div>
+            
+            <div className="followingWidth">
+                <div  className={isVisible == 2 ? "visible" : "hide"}>
+                    <Followers></Followers>
+                </div>
+            </div>
+            
+            
         </div>
     )
 }
+
+//top bar
+
+// <div className="topBar">
+//                 <>
+//                     {user && 
+//                         <>
+//                             <img className="profilePic" src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img>
+//                             <p className="UserName">{user?.displayName}</p>
+//                             <button className="editProfile" onClick={()=>{setEditProfile(!editProfile)}}><i className="fa-sharp fa-solid fa-pen"></i></button>
+//                             {editProfile && 
+//                                 <form onSubmit={handleSubmit(submitPost)}>
+//                                     <input type="file" onChange={handleImage}></input>
+//                                     <button >Update</button>
+//                                 </form>
+//                             }
+//                         </>
+//                 }
+//                 </>
+                
+
+//                 <div className="profileDetails">
+//                     <p className="Posts" onClick={()=>{setIsVisible(0)}}>posts:</p>
+//                     <p className="Following" onClick={()=>{setIsVisible(1)}}>Following : {followingCount}</p>
+//                     <p  className="Followers" onClick={()=>{setIsVisible(2);}}>Followers : {followersCount}</p>
+//                 </div>
+//             </div>

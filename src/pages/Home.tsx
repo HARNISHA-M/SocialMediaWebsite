@@ -9,7 +9,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export interface PostType {
     id:string,
     Description:string,
-    Title:string,
     Url:string,
     userId:string,
     username:string,
@@ -65,8 +64,7 @@ export const Home = () => {
     useEffect(()=>{
         getPosts();
         getFollowingList();
-    },[user?.uid,followingData?.FollowingList]);
-    
+    },[user?.uid])
 
     return(
         <div>
@@ -74,7 +72,7 @@ export const Home = () => {
 
                 {postList?.map((posts)=>(
                     <ShowPost post={posts} />
-                ))};
+                ))}
 
             </Homecontext.Provider>
         </div>

@@ -1,0 +1,26 @@
+.newPost
+{
+    box-shadow:0 2px 30px rgb(0 0 0 / 10%);
+    width: 50%;
+    height: 50%;
+    margin-left: 40%;
+    margin-right: auto;
+    text-align: left;
+    /* margin-top: 200px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+.newPost .newForm{
+    padding: 10%;
+    
+}
+
+.newForm input, .newForm textarea{
+    text-align: center;
+}
+
+.newPost label{
+    display: block;
+}

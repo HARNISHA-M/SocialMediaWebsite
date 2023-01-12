@@ -7,6 +7,7 @@ import {Comment} from './Comment';
 import { DeletePost } from './DeletePost';
 import { Following } from './Following';
 import { ShowProfile } from "./showProfile";
+import '../styles/post.css';
 
 interface propType {
     post:PostType;
@@ -41,33 +42,36 @@ export const ShowPost = (props:propType) => {
     const hasLiked = LikeId.includes(user?.uid);
 
     return(
-        <div>
-
-            <div>
-                <ShowProfile postUserId={post.userId}></ShowProfile>
-            </div>
-            <div className='title'>
-                <h1>{post.Title}</h1>
-            </div>
-            {post.Url!=null && <div className='image'>
-                <img src={post.Url} style={{width: '300px', height:'200px'}}></img>
-            </div>}
-            <div className='Description'>
-                <p>{post.Description}</p>
-            </div>
-            <div className='username'>
-                <p>@{post.username}</p>
-            </div>
-            
-            <div className='footer'>
-                <button onClick={hasLiked ? removeId: AddId}>{hasLiked? <>&#128078;</>: <>&#128077;</>}</button>
-                <p>Likes:{LikeId.length}</p>
+        <div className="post-block">
+            <div className='top-post'>
+                <div className='profileAndName'>
+                    <ShowProfile postUserId={post.userId}></ShowProfile>
+                    <h3>{post.username}</h3>
+                </div>
                 <div>
-                    <Comment postId={post.id} postComments={post.comments}  />
+                    {user?.uid == post.userId && <DeletePost postId = {post.id} imageUrl = {post.Url}></DeletePost>}
+                    {user?.uid != post.userId && <Following userId = {post.userId}  userName = {post.username}></Following>}
                 </div>
             </div>
-            {user?.uid == post.userId && <DeletePost postId = {post.id} imageUrl = {post.Url}></DeletePost>}
-            {user?.uid != post.userId && <Following userId = {post.userId}  userName = {post.username}></Following>}
+            <div className="middleWidth">
+                <div className='post-middle'>
+                    <p className='Description'>{post.Description}</p>
+                    {post.Url!=null && <div className='image'>
+                    <img src={post.Url} style={{width: '300px', height:'200px'}}></img>
+                    </div>}
+                    
+                </div>
+                
+
+                <div className='footer'>
+                    <button onClick={hasLiked ? removeId: AddId}>{hasLiked ?  <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}</button>
+                    <p>Liked by {LikeId.length} people</p>
+                </div>
+            </div>
+            <div>
+                <Comment postId={post.id} postComments={post.comments}  />
+            </div>
+            
             
         </div>
     )

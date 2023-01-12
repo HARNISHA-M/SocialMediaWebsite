@@ -29,6 +29,6 @@ export const DeletePost = (props:deleteProps) => {
         postData?.setPostList(newPostList);
     }
     return (
-        <button onClick={deletePost}>Delete post</button>
+        <button onClick={deletePost} className="follow">Delete post</button>
     )
 }

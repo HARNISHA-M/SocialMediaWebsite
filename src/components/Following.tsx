@@ -88,12 +88,12 @@ export const Following  = (props:followingType) => {
 
     useEffect(()=>{
         followingState();
-    },[user?.uid,isFollowing,followingData?.FollowingList])
+    },[user?.uid,followingData?.FollowingList])
 
     return (
         <div>
-            {isFollowing===true && <button onClick={removeFollowingId}>unFollow</button>}
-            {isFollowing===false && <button onClick={addFollowingId}>Follow</button>}
+            {isFollowing===true && <button onClick={removeFollowingId} className="follow">unFollow</button>}
+            {isFollowing===false && <button onClick={addFollowingId} className="follow">Follow</button>}
         </div>
     )
 }

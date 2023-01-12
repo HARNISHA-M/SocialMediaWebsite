@@ -5,18 +5,20 @@ import { ShowProfile } from "./showProfile";
 
 export const ShowFollowingComponent = () => {
 
-    const followingData = useContext(Appcontext);
+    const followingData = useContext(Appcontext)
 
     return(
 
         <div>
             {followingData?.FollowingList?.map((element)=>(
-                <div>
-                    <ShowProfile postUserId={element.userId}></ShowProfile>
-                    {element.userName}
+                <div className="followingDetails">
+                    <div>
+                        <ShowProfile postUserId={element.userId}></ShowProfile>
+                        <p>{element.userName}</p>
+                    </div>
                     <Following userId = {element.userId}  userName = {element.userName}></Following>
                 </div>
-            ))};
+            ))}
         </div>
     )
 }

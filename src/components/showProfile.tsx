@@ -24,7 +24,8 @@ export const ShowProfile = (props:any) => {
 
     return(
         <div>
-            <img src={profile != null && profile.length > 5 ? profile : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50px" height="50px"></img> 
+            <img className="profile"
+            src={profile != null && profile.length > 5 ? profile : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50px" height="50px"></img> 
         </div>
     )
 }

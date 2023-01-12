@@ -43,7 +43,6 @@ function App() {
         </Router>
       </Appcontext.Provider>
     </div>
-  );
+  )
 }
-
 export default App;

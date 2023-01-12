@@ -9,16 +9,14 @@ import {storage} from "../../config/firebase";
 import {uploadBytes,ref,getDownloadURL} from "firebase/storage";
 import { useState } from "react";
 import  {v4} from "uuid";
+import '../../styles/createPost.css';
 
 interface data {
-    Title:string;
     Description : string;
     Image:null;
 }
 export const Addpostform = () => {
-
     const schema = yup.object().shape({
-        Title:yup.string().required("You must add title..!"),
         Image:yup.mixed().required("You must add images to your post"),
         Description:yup.string().required("You must add description..!"),
     });
@@ -43,7 +41,6 @@ export const Addpostform = () => {
         const url= await getDownloadURL(imageRef);
         console.log(url);
         await addDoc(postsRef,{
-            Title:data.Title,
             Description:data.Description,
             Url:url,
             username:user?.displayName,
@@ -56,18 +53,19 @@ export const Addpostform = () => {
 
     const postsRef = collection(db, "posts");
     return (
-        <div>
+        <div className="newPost">
             <form onSubmit={handleSubmit(submitPost)}>
-                <input placeholder="Title.." {...register("Title")} style={{marginTop:20}}/>
-                <p style={{color:"red"}}>{errors.Title?.message}</p>
+                <div className="newForm">
+                    <label>Post Image:</label>
+                    <input type="file"  {...register("Image")}  onChange={handleImage}></input>
+                    <p style={{color:"red"}}>{errors.Image?.message}</p>
 
-                <input type="file"  {...register("Image")}  onChange={handleImage}></input>
-                <p style={{color:"red"}}>{errors.Image?.message}</p>
+                    <label>Post Description:</label>
+                    <textarea  {...register("Description")}/>
+                    <p style={{color:"red"}}>{errors.Description?.message}</p>
 
-                <textarea placeholder="Description.." {...register("Description")}/>
-                <p style={{color:"red"}}>{errors.Description?.message}</p>
-
-                <input type="submit"></input>   
+                    <input type="submit"></input>   
+                </div>
             </form>
         </div>
     )

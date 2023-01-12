@@ -1,0 +1,99 @@
+.navbar .inactive
+{
+    text-decoration: none;
+    display: flex;
+    text-align: left;
+    cursor: pointer;
+    padding: 15px;
+    height: 100%;
+    align-items: center;
+    background: #fff;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.navbar .active
+{
+    text-decoration: none;
+    border-radius: 5px;
+    display: flex;
+    text-align: left;
+    cursor: pointer;
+    padding: 15px;
+    height: 100%;
+    transition: all 0.3s;
+    align-items: center;
+    background: linear-gradient(120deg, #b057c7, #2596be);
+    color: #fff;
+    box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.navbar i
+{
+    display: grid;
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+    border: 2px solid #8b50ff;
+    background: #fff;
+    color: #8b50ff;
+    font-size: 17px;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.navbar .active i 
+{
+    border: 2px solid white !important;
+}
+
+.navbar  span 
+{
+    margin-left: 8%;
+}
+
+.navbar
+{
+    float: left;
+    width: 23% !important;
+    box-shadow:0 2px 30px rgb(0 0 0 / 10%);
+    height: 100vh;
+    margin-left: -1%;
+    margin-top: -1%;
+    position: fixed;
+}
+
+.navbar .ProfileImg
+{
+    align-items: center;
+    display: inline;
+    margin-top: 14%;
+    height: 110px;
+    width: 110px;
+    border-radius: 150px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.navbar .profileBackground
+{
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 20%;
+    background-image: url(https://kiranworkspace.com/demo/projects/code-snippets/card/profile-card/img/banner.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+.navbar .UserName
+{
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 5%;
+}

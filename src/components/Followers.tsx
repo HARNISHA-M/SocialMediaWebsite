@@ -10,11 +10,11 @@ export const Followers = () => {
 
         <div>
             {followingData?.FollowersList?.map((element)=>(
-                <div>
+                <div className="followersDetails">
                     <ShowProfile postUserId={element.userId}></ShowProfile>
-                    {element.userName}
+                    <p>{element.userName}</p>
                 </div>
-            ))};
+            ))}
         </div>
     )
 }
