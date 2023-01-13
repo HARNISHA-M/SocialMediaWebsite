@@ -111,3 +111,43 @@ hr{
     color: black;
     background-color: rgb(226, 226, 226);
 }
+
+
+@media screen and (max-width:650px) {
+    
+    .myProfile
+    {
+        margin-top: 25%;
+    }
+
+    hr
+    {
+        margin-left: 0px;
+    }
+
+    .followingWidth
+    {
+        width:100%;
+        margin-left: 0%;
+    }
+}
+
+@media screen and (min-width:650px) and (max-width:950px)
+{
+    
+    .followingWidth
+    {
+        width:65% !important;
+        margin-left: 30%;
+    }
+
+    .followersDetails
+    {
+        margin-left: 0px;
+    }
+
+    .followingDetails
+    {
+        margin-left: 0px;
+    }
+}

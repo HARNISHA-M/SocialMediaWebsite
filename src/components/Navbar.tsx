@@ -29,6 +29,14 @@ export const Navbar = () => {
         });
             
     }
+    const myFunction = () => {
+        document?.getElementById("myDropdown")?.classList.toggle("show");
+    }
+    
+    document.getElementById("myDropdown")?.addEventListener("click",( () => {
+        document?.getElementById("myDropdown")?.classList.remove("show");
+        console.log("re");
+    })); 
 
     useEffect(()=>{
         profilePic();
@@ -37,22 +45,28 @@ export const Navbar = () => {
     return (
         <div className="navbar">
            <div>
-                {user && 
-                    <>
-                        <div className="profileBackground"></div>
-                        {console.log(urldata?.url)}
-                        <img src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50" height="50" className="ProfileImg"></img>
-                        <div className="UserName">{user?.displayName?.split(" ")[0]}</div>
-                    </>
-                }
-                <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-house"></i><span>Home</span></NavLink>
-                {user ? <NavLink to="/addpost" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-plus"></i><span>Create Post</span></NavLink> : <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-right-to-bracket"></i><span>LogIn</span></NavLink>}
-                {user &&
-                    <>
-                        <NavLink to='/myprofile' className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-user"></i><span>My Profile</span></NavLink>
-                        <a onClick={logout} className="inactive"><i className="fa-solid fa-right-from-bracket"></i><span>LogOut</span></a>
-                    </>
-                }
+                <div>
+                    {user && 
+                        <>
+                            <div className="profileBackground"></div>
+                            <img src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="50" height="50" className="ProfileImg"></img>
+                            <div className="UserName">{user?.displayName?.split(" ")[0]}</div>
+                        </>
+                    }
+                </div>
+                <div className="dropdown">
+                    <button onClick={myFunction} className="dropbtn"><i className="fa-solid fa-bars"></i></button>
+                    <div id="myDropdown" className="dropdown-content">
+                        <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-house"></i><span>Home</span></NavLink>
+                        {user ? <NavLink to="/addpost" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-plus"></i><span>Create Post</span></NavLink> : <NavLink to="/login" className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-right-to-bracket"></i><span>LogIn</span></NavLink>}
+                        {user &&
+                            <>
+                                <NavLink to='/myprofile' className={({ isActive }) => (isActive ? 'active' : 'inactive')}><i className="fa-solid fa-user"></i><span>My Profile</span></NavLink>
+                                <a onClick={logout} className="inactive"><i className="fa-solid fa-right-from-bracket"></i><span>LogOut</span></a>
+                            </>
+                        }
+                    </div>
+                </div>
            </div>
         </div>
     )

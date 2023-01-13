@@ -85,7 +85,6 @@ export const Myprofile = () => {
     const getPostCount =async () => {
             const postRef = collection(db,"posts");
              const data= await getDocs(postRef);
-             console.log("`````````")
              setPostCount(data.docs.length)
             
         
@@ -96,10 +95,9 @@ export const Myprofile = () => {
     },[])
     return(
         <div className="myProfile">
-            <div className="topBar"><>
-            {console.log(urldata?.url)}</>
+            <div className="topBar">
                   <div className="profilePic">
-                  <img className="profilePicture" src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img>
+                    <img className="profilePicture" src={(urldata && urldata.url && urldata.url!=null ) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img>
                     <button className="editProfile" onClick={()=>{setEditProfile(!editProfile)}}><i className="fa-sharp fa-solid fa-pen"></i></button>
                     {editProfile && 
                         <form onSubmit={handleSubmit(submitPost)}>
@@ -139,30 +137,3 @@ export const Myprofile = () => {
         </div>
     )
 }
-
-//top bar
-
-// <div className="topBar">
-//                 <>
-//                     {user && 
-//                         <>
-//                             <img className="profilePic" src={(urldata && urldata.url) ? (urldata && urldata.url) : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"} width="100" height="100" ></img>
-//                             <p className="UserName">{user?.displayName}</p>
-//                             <button className="editProfile" onClick={()=>{setEditProfile(!editProfile)}}><i className="fa-sharp fa-solid fa-pen"></i></button>
-//                             {editProfile && 
-//                                 <form onSubmit={handleSubmit(submitPost)}>
-//                                     <input type="file" onChange={handleImage}></input>
-//                                     <button >Update</button>
-//                                 </form>
-//                             }
-//                         </>
-//                 }
-//                 </>
-                
-
-//                 <div className="profileDetails">
-//                     <p className="Posts" onClick={()=>{setIsVisible(0)}}>posts:</p>
-//                     <p className="Following" onClick={()=>{setIsVisible(1)}}>Following : {followingCount}</p>
-//                     <p  className="Followers" onClick={()=>{setIsVisible(2);}}>Followers : {followersCount}</p>
-//                 </div>
-//             </div>
