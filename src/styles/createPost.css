@@ -1,0 +1,49 @@
+.card {
+    box-shadow: 0 2px 30px rgb(0 0 0 / 10%);
+    display: flex;
+    overflow: hidden;
+    margin-left: 40%;
+    width: 40%;
+    height: auto;
+}
+.card .message {
+    flex: 1;
+    background: #007bff;
+    color: #fff;
+    padding: 5px;
+}
+.card .body {
+    flex: 10;
+    padding: 48px 24px;
+}
+
+.card .body .body-wrapper {
+    max-width: 400px;
+    text-align: left;
+    margin-left: 10%;
+}
+
+.body-wrapper label{
+    display: block;
+    font-size: medium;
+    font-weight: 800;
+    padding-bottom: 5%;
+}
+
+.body-wrapper input[type=submit]
+{
+    border-radius: 10px;
+    background-color:#2596be;
+    color: white;
+    border-color: #2596be;
+
+}
+
+@media screen and (max-width:650px) {
+    
+    .card{
+        margin-top: 27%;
+        width: 100%;
+        margin-left: 0px;
+    }
+}

@@ -1,0 +1,157 @@
+.post-block
+{
+    background: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 30px rgb(0 0 0 / 10%);
+    transition: all 0.2s;
+    margin-left: 35%;
+    width: 40%;
+}
+
+.post-block .top-post
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.post-block .middleWidth
+{
+    width: 50%;
+    margin-left: 20%;
+}
+
+.post-block .profileAndName
+{
+    display: flex;
+    font-style: italic;
+}
+
+
+.post-block .profileAndName img{
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.post-block .Description
+{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.post-block .footer{
+    display: flex;
+    text-align: left;
+}
+
+.post-block .footer button 
+{
+    border: none;
+    background: white;
+}
+
+.comment button
+{
+    background-color: #2596be;
+    border:#2596be;
+    color: white;
+    width: 8%;
+    height: 25px;
+}
+
+.comment button i {
+    font-size: 15px;
+    margin-left: -3px;
+}
+.comment input{
+    height: 20px;
+    width: 52%;
+}
+
+hr{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+a{
+    cursor: pointer;
+}
+
+.hide
+{
+    display: none;
+}
+.visible {
+    display: flex;
+    margin-left: 17%;
+    margin-top: 10px;
+}
+
+.visible div .profile 
+{
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+
+}
+
+.visible div span
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.visible .comments
+{
+    display: block;
+    margin-bottom: 0.25rem!important;
+    text-align: left;
+    font-weight: 500;
+    
+}
+
+.follow
+{
+    border-radius: 10px;
+    border-color: #2596be;
+    background-color: #2596be;
+    color: #fff;
+    font-weight: 700;
+}
+
+@media screen and (max-width:650px) {
+    
+    .post-block:nth-child(1)
+    {
+        margin-top: 25%;
+    }
+    .post-block
+    {
+        width:100% !important;
+        z-index: -1;
+        margin-left: 0px !important;
+        padding: 0px;
+        padding-bottom: 30px;
+    }
+}
+
+
+@media screen and (max-width:950px) {
+
+    .post-block
+    {
+        width:70%;
+        margin-left: 28%;
+        padding: 0px;
+        
+    }
+}

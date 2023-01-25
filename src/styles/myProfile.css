@@ -1,0 +1,153 @@
+
+.myProfile .visible
+{
+    display: inline;
+}
+
+.myProfile .hide
+{
+    display: none;
+}
+
+.Profile{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 40px;
+}
+.topBar{
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;   
+}
+
+.profilePic{
+    width: 150px;
+    display: block;
+    text-align: center;
+}
+
+.topBar .profileDetails{
+    display: flex;
+    gap:25px;
+    margin-top: 35px;
+}
+ 
+.profileDetails .name{
+    font-family: 'Fira Sans', sans-serif;
+    font-size: medium;
+}
+ 
+.profileDetails div{
+    cursor: pointer;
+}
+ 
+.borderBottom{
+    border-bottom: 3px solid black;
+}
+
+.profilePic .UserName{
+    font-style: italic;
+    display:block;
+    font-weight: 900;
+}
+ 
+.profilePic .profilePicture{
+    border-radius: 70%;
+}
+
+hr{
+    margin-left: 23%;
+}
+
+.followingDetails {
+    display: flex;
+    /* margin-left: 45%; */
+    justify-content: space-between;
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+    padding:10px;
+}
+
+.followingDetails div{
+    display: flex;
+}
+.followingDetails .profile 
+{
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.followingDetails p , .followersDetails p
+{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+    font-size: large;
+}
+
+.followingWidth
+{
+    width:40%;
+    margin-left: 35%;
+}
+
+.followersDetails
+{
+    display: flex;
+    border-bottom: 1px solid grey;
+    padding:10px;
+    margin-left: 5%;
+}
+
+.myProfile .editProfile
+{
+    margin-left: -25%;
+    border:none;
+    border-radius: 50%;
+    width:15%;
+    height:15%;
+    color: black;
+    background-color: rgb(226, 226, 226);
+}
+
+
+@media screen and (max-width:650px) {
+    
+    .myProfile
+    {
+        margin-top: 25%;
+    }
+
+    hr
+    {
+        margin-left: 0px;
+    }
+
+    .followingWidth
+    {
+        width:100%;
+        margin-left: 0%;
+    }
+}
+
+@media screen and (min-width:650px) and (max-width:950px)
+{
+    
+    .followingWidth
+    {
+        width:65% !important;
+        margin-left: 30%;
+    }
+
+    .followersDetails
+    {
+        margin-left: 0px;
+    }
+
+    .followingDetails
+    {
+        margin-left: 0px;
+    }
+}
